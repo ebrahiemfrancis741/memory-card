@@ -19,6 +19,21 @@ export default function Board() {
     })()
   );
 
+  useEffect(() => {
+    const getDataList = async () => {
+      let data = [];
+      for (let i = 0; i < 10; i++) {
+        data[i] = await fetch(
+          `https://pokeapi.co/api/v2/pokemon/${Math.ceil(Math.random() * 500)}`
+        );
+        console.log(data[i]);
+      }
+      setLoading(false);
+    };
+    getDataList();
+    return () => {};
+  }, []);
+
   return (
     <>
       {loading ? <h2>Loading images</h2> : null}
